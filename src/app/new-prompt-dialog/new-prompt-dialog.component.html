@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Create New Prompt</h2>
+
+<mat-dialog-content [formGroup]="form">
+  <div class="dialog-form-container">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="e.g. Generate UI Component Scaffold" required>
+      <mat-error *ngIf="form.get('title')?.hasError('required')">
+        Title is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width snippet-field">
+      <mat-label>Prompt Instruction</mat-label>
+      <textarea matInput formControlName="snippet" placeholder="Type your instruction here..." rows="6" required></textarea>
+      <mat-error *ngIf="form.get('snippet')?.hasError('required')">
+        Instruction snippet is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Tags</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Enter tags">
+        <mat-chip-row *ngFor="let tag of tagsControl?.value" (removed)="removeTag(tag)">
+          {{tag}}
+          <button matChipRemove [attr.aria-label]="'remove ' + tag">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+        <input placeholder="New tag..."
+               [matChipInputFor]="chipGrid"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="true"
+               (matChipInputTokenEnd)="addTag($event)">
+      </mat-chip-grid>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">Save Prompt</button>
+</mat-dialog-actions>

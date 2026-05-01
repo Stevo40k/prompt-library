@@ -1,0 +1,34 @@
+.dialog-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.snippet-field {
+  textarea {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+}
+
+// Dialog theming overrides
+::ng-deep .mustang-dialog {
+  .mat-mdc-dialog-container {
+    .mdc-dialog__surface {
+      background-color: var(--mustang-surface-container);
+      color: var(--mustang-on-surface);
+      border-radius: 12px;
+    }
+  }
+
+  .mat-mdc-dialog-title {
+    color: var(--mustang-on-surface);
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+  }
+}

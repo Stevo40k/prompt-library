@@ -1,0 +1,72 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$mustang-theme: mat.define-theme((
+  color: (
+    theme-type: dark,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    plain-family: 'Roboto, "Helvetica Neue", sans-serif',
+    brand-family: 'Roboto, "Helvetica Neue", sans-serif',
+  ),
+));
+
+// Apply the theme to the application
+html {
+  @include mat.all-component-themes($mustang-theme);
+}
+
+// Map Stitch CSS variables to Material M3 tokens
+:root {
+  /* Mustang Prompt Library - Stitch Colors */
+  --mustang-charcoal: #1A1C1E;
+  --electric-blue: #D1E4FF;
+  --mustang-surface: #131315;
+  --mustang-surface-container: #1f2021;
+  --mustang-on-surface: #E2E2E6;
+  --mustang-surface-variant: #343536;
+  --mustang-outline-variant: #C3C7CF;
+  
+  /* Material M3 Token Overrides */
+  --sys-surface: var(--mustang-surface);
+  --sys-on-surface: var(--mustang-on-surface);
+  --sys-primary-container: var(--electric-blue);
+  
+  --mat-app-background-color: var(--sys-surface);
+  --mat-app-text-color: var(--sys-on-surface);
+  --mat-card-container-color: var(--mustang-surface-container);
+  --mat-dialog-container-color: var(--mustang-surface-container);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Work+Sans:wght@600&display=swap');
+
+.code-snippet {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 20px;
+  background-color: var(--mustang-surface-variant);
+  color: var(--mustang-on-surface);
+  padding: 16px;
+  border-radius: 8px;
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.code-snippet pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+}
+
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-color: var(--mat-app-background-color);
+  color: var(--mat-app-text-color);
+}

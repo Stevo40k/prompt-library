@@ -1,0 +1,45 @@
+<div class="dashboard-container">
+  <!-- Global Search Bar -->
+  <div class="search-container">
+    <mat-form-field appearance="fill" class="search-bar">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput type="text" placeholder="Search your prompts..." [ngModel]="searchQuery()" (input)="onSearch($event)">
+      <button mat-icon-button matSuffix>
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="section-header">
+    <h2 class="headline-sm">Recent Prompts</h2>
+    <div class="count-pill">{{ filteredPrompts().length }}</div>
+  </div>
+
+  <!-- Prompts List -->
+  <div class="prompts-grid">
+    <mat-card *ngFor="let prompt of filteredPrompts()" class="prompt-card">
+      <mat-card-header>
+        <mat-card-title class="title-medium">{{ prompt.title }}</mat-card-title>
+        <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="code-snippet">
+          <pre>{{ prompt.snippet }}</pre>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-chip-set>
+          <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
+        </mat-chip-set>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Floating Action Button -->
+  <button mat-fab extended color="primary" class="new-prompt-fab" (click)="openNewPromptDialog()">
+    <mat-icon>add</mat-icon>
+    New Prompt
+  </button>
+</div>
