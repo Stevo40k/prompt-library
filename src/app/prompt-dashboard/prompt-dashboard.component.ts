@@ -38,6 +38,7 @@ export class PromptDashboardComponent {
 
   // State
   searchQuery = signal('');
+  viewMode = signal<'grid' | 'list'>('grid');
   prompts = signal<Prompt[]>([
     {
       title: 'Generate UI Component Scaffold',
@@ -69,6 +70,10 @@ export class PromptDashboardComponent {
   onSearch(event: Event) {
     const input = event.target as HTMLInputElement;
     this.searchQuery.set(input.value);
+  }
+
+  setViewMode(mode: 'grid' | 'list') {
+    this.viewMode.set(mode);
   }
 
   openNewPromptDialog() {

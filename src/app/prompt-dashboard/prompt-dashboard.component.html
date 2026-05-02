@@ -8,6 +8,15 @@
         <mat-icon>filter_list</mat-icon>
       </button>
     </mat-form-field>
+
+    <div class="view-toggle">
+      <button mat-icon-button [color]="viewMode() === 'grid' ? 'primary' : ''" (click)="setViewMode('grid')" aria-label="Grid view">
+        <mat-icon>grid_view</mat-icon>
+      </button>
+      <button mat-icon-button [color]="viewMode() === 'list' ? 'primary' : ''" (click)="setViewMode('list')" aria-label="List view">
+        <mat-icon>view_list</mat-icon>
+      </button>
+    </div>
   </div>
 
   <div class="section-header">
@@ -16,26 +25,48 @@
   </div>
 
   <!-- Prompts List -->
-  <div class="prompts-grid">
-    <mat-card *ngFor="let prompt of filteredPrompts()" class="prompt-card">
-      <mat-card-header>
-        <mat-card-title class="title-medium">{{ prompt.title }}</mat-card-title>
-        <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
-          <mat-icon>content_copy</mat-icon>
-        </button>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="code-snippet">
-          <pre>{{ prompt.snippet }}</pre>
+  <!-- Prompts Container -->
+  <ng-container *ngIf="viewMode() === 'grid'">
+    <div class="prompts-grid">
+      <mat-card *ngFor="let prompt of filteredPrompts()" class="prompt-card">
+        <mat-card-header>
+          <mat-card-title class="title-medium">{{ prompt.title }}</mat-card-title>
+          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="code-snippet">
+            <pre>{{ prompt.snippet }}</pre>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-chip-set>
+            <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
+          </mat-chip-set>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="viewMode() === 'list'">
+    <div class="prompts-list">
+      <div *ngFor="let prompt of filteredPrompts()" class="prompt-list-item">
+        <div class="list-item-content-wrapper">
+          <h3 class="title-medium list-item-title">{{ prompt.title }}</h3>
+          <div class="snippet-preview">{{ prompt.snippet }}</div>
         </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <mat-chip-set>
-          <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
-        </mat-chip-set>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        <div class="list-item-actions">
+          <mat-chip-set class="list-item-chips">
+            <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
+          </mat-chip-set>
+          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 
   <!-- Floating Action Button -->
   <button mat-fab extended color="primary" class="new-prompt-fab" (click)="openNewPromptDialog()">
