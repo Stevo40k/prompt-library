@@ -5,11 +5,11 @@
     </div>
 
     <mat-nav-list class="main-nav">
-      <a mat-list-item class="active-nav-item">
+      <a mat-list-item routerLink="/library" routerLinkActive="active-nav-item">
         <mat-icon matListItemIcon>folder_special</mat-icon>
         <span matListItemTitle>Library</span>
       </a>
-      <a mat-list-item>
+      <a mat-list-item routerLink="/collections" routerLinkActive="active-nav-item">
         <mat-icon matListItemIcon>layers</mat-icon>
         <span matListItemTitle>Collections</span>
       </a>
@@ -38,6 +38,6 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="app-content">
-    <app-prompt-dashboard></app-prompt-dashboard>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

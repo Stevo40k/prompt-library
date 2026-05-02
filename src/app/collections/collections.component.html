@@ -1,0 +1,24 @@
+<div class="collections-container">
+  <div class="section-header">
+    <div class="header-text">
+      <h2>Your Collections</h2>
+      <p class="subtitle">Manage and organize your prompt workspaces.</p>
+    </div>
+    <button mat-fab extended color="primary" class="new-collection-btn">
+      <mat-icon>add</mat-icon>
+      New Collection
+    </button>
+  </div>
+
+  <div class="collections-grid">
+    <mat-card *ngFor="let collection of collections()" class="collection-card">
+      <mat-card-header>
+        <div mat-card-avatar class="collection-avatar">
+          <mat-icon>folder_open</mat-icon>
+        </div>
+        <mat-card-title class="title-medium">{{ collection.name }}</mat-card-title>
+        <mat-card-subtitle>{{ collection.updatedAt }}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
