@@ -1,1 +1,43 @@
-<app-prompt-dashboard></app-prompt-dashboard>
+<mat-sidenav-container class="app-container">
+  <mat-sidenav mode="side" opened class="app-sidenav">
+    <div class="sidenav-header">
+      <h2 class="app-title">Mustang Vault</h2>
+    </div>
+
+    <mat-nav-list class="main-nav">
+      <a mat-list-item class="active-nav-item">
+        <mat-icon matListItemIcon>folder_special</mat-icon>
+        <span matListItemTitle>Library</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon matListItemIcon>layers</mat-icon>
+        <span matListItemTitle>Collections</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon matListItemIcon>query_stats</mat-icon>
+        <span matListItemTitle>Analytics</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon matListItemIcon>terminal</mat-icon>
+        <span matListItemTitle>Documentation</span>
+      </a>
+    </mat-nav-list>
+    
+    <div class="sidenav-footer">
+      <mat-nav-list>
+        <a mat-list-item>
+          <mat-icon matListItemIcon>settings</mat-icon>
+          <span matListItemTitle>Settings</span>
+        </a>
+        <a mat-list-item>
+          <mat-icon matListItemIcon>help_outline</mat-icon>
+          <span matListItemTitle>Support</span>
+        </a>
+      </mat-nav-list>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="app-content">
+    <app-prompt-dashboard></app-prompt-dashboard>
+  </mat-sidenav-content>
+</mat-sidenav-container>
