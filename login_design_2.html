@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mustang Prompt Library - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@400&amp;family=Space+Grotesk:wght@500&amp;family=Work+Sans:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#343536",
+                        "on-secondary-container": "#9cb5ed",
+                        "primary-container": "#d1e4ff",
+                        "surface-tint": "#b5c8e2",
+                        "inverse-surface": "#e4e2e4",
+                        "surface-variant": "#343536",
+                        "outline": "#8e9197",
+                        "secondary": "#adc6ff",
+                        "tertiary-container": "#fcdeaf",
+                        "mustang-charcoal": "#1A1C1E",
+                        "error-container": "#93000a",
+                        "electric-blue": "#D1E4FF",
+                        "tertiary-fixed": "#fcdeaf",
+                        "on-surface-variant": "#c4c6cd",
+                        "on-tertiary-fixed-variant": "#574421",
+                        "primary-fixed": "#d1e4ff",
+                        "on-surface": "#e4e2e4",
+                        "surface-dim": "#131315",
+                        "on-tertiary-fixed": "#271900",
+                        "on-tertiary": "#3f2d0c",
+                        "on-secondary-fixed-variant": "#2c4677",
+                        "tertiary": "#fffeff",
+                        "surface-container": "#1f2021",
+                        "on-secondary-fixed": "#001a42",
+                        "secondary-fixed": "#d8e2ff",
+                        "outline-variant": "#44474c",
+                        "on-primary": "#1f3246",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#122f5f",
+                        "on-background": "#e4e2e4",
+                        "surface-container-lowest": "#0d0e10",
+                        "primary": "#ffffff",
+                        "surface-container-low": "#1b1c1d",
+                        "surface": "#131315",
+                        "tertiary-fixed-dim": "#dfc395",
+                        "on-primary-fixed-variant": "#36485e",
+                        "on-primary-fixed": "#081d30",
+                        "background": "#131315",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-primary-container": "#54667d",
+                        "surface-bright": "#39393b",
+                        "secondary-container": "#2c4677",
+                        "inverse-primary": "#4e6076",
+                        "primary-fixed-dim": "#b5c8e2",
+                        "surface-container-high": "#292a2c",
+                        "inverse-on-surface": "#303032",
+                        "on-tertiary-container": "#77613b",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "margin": "24px",
+                        "density-scale": "-2",
+                        "card-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "label-large": ["Space Grotesk"],
+                        "body-medium": ["Inter"],
+                        "headline-sm": ["Work Sans"],
+                        "title-medium": ["Inter"],
+                        "body-large": ["Inter"],
+                        "code-snippet": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "label-large": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-medium": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "title-medium": ["16px", { "lineHeight": "24px", "letterSpacing": "0.15px", "fontWeight": "500" }],
+                        "body-large": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "code-snippet": ["13px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-mustang-charcoal text-on-surface min-h-screen flex flex-col font-body-medium text-body-medium">
+<header class="bg-[#1A1C1E] dark:bg-[#1A1C1E] text-[#D1E4FF] dark:text-[#D1E4FF] font-['Work_Sans'] tracking-tight flex justify-between items-center px-4 h-16 w-full z-50 fixed top-0 border-b border-[#2C2E30] flat no-shadows border-gray-800">
+<div class="text-lg font-bold text-[#D1E4FF] font-mono flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+            Mustang Prompt Library
+        </div>
+</header>
+<main class="flex-grow flex items-center justify-center p-4 mt-16 mb-auto z-10 relative w-full">
+<div class="w-full max-w-md bg-surface-container rounded-xl p-8 shadow-xl shadow-black/40 border border-outline-variant/20 flex flex-col gap-8 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/5 to-transparent pointer-events-none"></div>
+<div class="text-center relative z-10">
+<h1 class="font-headline-sm text-headline-sm text-on-surface mb-1">Sign in</h1>
+<p class="font-body-medium text-body-medium text-on-surface-variant">Access the Mustang Vault</p>
+</div>
+<form class="flex flex-col gap-5 relative z-10">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-large text-label-large text-on-surface-variant">Email address</label>
+<input class="bg-surface-variant border border-outline-variant rounded-lg px-4 py-3 font-body-large text-body-large text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline" placeholder="developer@mustang.tech" type="email"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-large text-label-large text-on-surface-variant">Password</label>
+<input class="bg-surface-variant border border-outline-variant rounded-lg px-4 py-3 font-body-large text-body-large text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all placeholder:text-outline" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex justify-end mt-[-8px]">
+<a class="font-label-large text-label-large text-primary-container hover:text-surface-tint hover:underline transition-colors" href="#">Forgot password?</a>
+</div>
+<button class="mt-2 bg-primary-container text-on-primary-container font-label-large text-label-large py-3.5 rounded-full hover:bg-surface-tint focus:ring-2 focus:ring-offset-2 focus:ring-offset-mustang-charcoal focus:ring-primary-container transition-all w-full flex items-center justify-center font-bold tracking-wide shadow-md shadow-primary-container/10" type="button">
+                    Sign In
+                </button>
+</form>
+<div class="flex items-center gap-4 my-2 relative z-10">
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+<span class="font-code-snippet text-code-snippet text-outline tracking-wider uppercase">or sign in with</span>
+<div class="h-px bg-outline-variant/50 flex-grow"></div>
+</div>
+<div class="flex gap-4 relative z-10">
+<button class="flex-1 flex items-center justify-center gap-2 border border-outline-variant rounded-lg py-2.5 hover:bg-surface-variant hover:border-outline focus:ring-2 focus:ring-outline-variant transition-all text-on-surface font-label-large text-label-large bg-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">code</span> GitHub
+                </button>
+<button class="flex-1 flex items-center justify-center gap-2 border border-outline-variant rounded-lg py-2.5 hover:bg-surface-variant hover:border-outline focus:ring-2 focus:ring-outline-variant transition-all text-on-surface font-label-large text-label-large bg-surface" type="button">
+<span class="material-symbols-outlined text-[20px]">public</span> Google
+                </button>
+</div>
+<div class="text-center mt-2 relative z-10">
+<span class="font-body-medium text-body-medium text-on-surface-variant">Don't have an account? <a class="text-primary-container hover:text-surface-tint hover:underline font-medium transition-colors" href="#">Sign up</a></span>
+</div>
+</div>
+</main>
+<footer class="bg-transparent text-gray-500 font-['Work_Sans'] text-xs w-full py-6 flex flex-col md:flex-row justify-center items-center gap-8 mt-auto z-10 border-t border-gray-800/50">
+<div class="flex flex-wrap justify-center gap-8 w-full max-w-4xl px-4">
+<a class="text-gray-600 hover:text-gray-400 transition-colors" href="#">Documentation</a>
+<a class="text-gray-600 hover:text-gray-400 transition-colors" href="#">System Status</a>
+<a class="text-gray-600 hover:text-gray-400 transition-colors" href="#">Privacy Policy</a>
+<span class="text-gray-500 ml-auto md:ml-0 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">© 2024 Mustang Tech. Built for engineers.</span>
+</div>
+</footer>
+</body></html>

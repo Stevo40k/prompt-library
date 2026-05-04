@@ -1,0 +1,88 @@
+<div class="login-page">
+  <header class="top-nav">
+    <div class="brand">
+      <span class="material-symbols-outlined">terminal</span>
+      CreativeKlenk Prompt Library
+    </div>
+  </header>
+
+  <main class="login-main">
+    <div class="login-card">
+      <div class="gradient-overlay"></div>
+      
+      <div class="header-text">
+        <h1>Sign in</h1>
+        <p>Access the CreativeKlenk Vault</p>
+      </div>
+
+      <div *ngIf="errorMessage()" class="error-alert">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage() }}</span>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <div class="form-field">
+          <label for="email">Email address</label>
+          <input 
+            type="email" 
+            id="email" 
+            formControlName="email" 
+            placeholder="developer@creativeklenk.tech"
+            [class.error]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          >
+        </div>
+
+        <div class="form-field">
+          <label for="password">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            formControlName="password" 
+            placeholder="••••••••"
+            [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          >
+        </div>
+
+        <div class="forgot-password">
+          <a href="javascript:void(0)">Forgot password?</a>
+        </div>
+
+        <button 
+          type="submit" 
+          class="submit-btn" 
+          [disabled]="loginForm.invalid || isLoading()"
+        >
+          {{ isLoading() ? 'Signing In...' : 'Sign In' }}
+        </button>
+      </form>
+
+      <div class="divider">
+        <div class="line"></div>
+        <span>or sign in with</span>
+        <div class="line"></div>
+      </div>
+
+      <div class="social-logins">
+        <button type="button" class="social-btn">
+          <span class="material-symbols-outlined">code</span> GitHub
+        </button>
+        <button type="button" class="social-btn">
+          <span class="material-symbols-outlined">public</span> Google
+        </button>
+      </div>
+
+      <div class="signup-prompt">
+        <span>Don't have an account? <a href="javascript:void(0)">Sign up</a></span>
+      </div>
+    </div>
+  </main>
+
+  <footer class="login-footer">
+    <div class="footer-links">
+      <a href="javascript:void(0)">Documentation</a>
+      <a href="javascript:void(0)">System Status</a>
+      <a href="javascript:void(0)">Privacy Policy</a>
+      <span class="copyright">© 2024 CreativeKlenk. Built for engineers.</span>
+    </div>
+  </footer>
+</div>
