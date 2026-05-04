@@ -1,17 +1,23 @@
 <div class="collections-container">
+  <div class="search-container">
+    <mat-form-field appearance="fill" class="search-bar">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput type="text" placeholder="Search collections..." [ngModel]="searchQuery()" (input)="onSearch($event)">
+      <button mat-icon-button matSuffix>
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
   <div class="section-header">
     <div class="header-text">
       <h2>Your Collections</h2>
       <p class="subtitle">Manage and organize your prompt workspaces.</p>
     </div>
-    <button mat-fab extended color="primary" class="new-collection-btn" (click)="openNewCollectionDialog()">
-      <mat-icon>add</mat-icon>
-      New Collection
-    </button>
   </div>
 
   <div class="collections-grid">
-    <mat-card *ngFor="let collection of promptService.collections()" class="collection-card" (click)="navigateTo(collection.id)">
+    <mat-card *ngFor="let collection of filteredCollections()" class="collection-card" (click)="navigateTo(collection.id)">
       <mat-card-header>
         <div mat-card-avatar class="collection-avatar">
           <mat-icon>folder_open</mat-icon>
@@ -21,4 +27,10 @@
       </mat-card-header>
     </mat-card>
   </div>
+
+  <button mat-fab extended color="primary" class="new-collection-btn" (click)="openNewCollectionDialog()">
+    <mat-icon>add</mat-icon>
+    New Collection
+  </button>
+
 </div>
