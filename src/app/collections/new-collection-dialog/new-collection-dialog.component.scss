@@ -1,0 +1,39 @@
+.dialog-title {
+  font-family: 'Work Sans', sans-serif;
+  color: var(--mustang-on-surface);
+  margin-bottom: 8px;
+}
+
+.dialog-content {
+  padding-top: 16px !important; // Override material default
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 400px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.dialog-actions {
+  padding: 16px 24px;
+  margin-bottom: 0;
+
+  .cancel-btn {
+    color: var(--mustang-on-surface);
+  }
+
+  .create-btn {
+    background-color: var(--electric-blue);
+    color: var(--mustang-charcoal);
+
+    &:disabled {
+      background-color: rgba(209, 228, 255, 0.12);
+      color: rgba(226, 226, 230, 0.38);
+    }
+  }
+}

@@ -1,0 +1,81 @@
+<div class="dashboard-container" *ngIf="collection(); else notFound">
+  
+  <div class="header-nav">
+    <button mat-icon-button routerLink="/collections" aria-label="Back to collections">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="section-header">
+      <h2 class="headline-sm">{{ collection()?.name }}</h2>
+      <span class="count-pill">{{ filteredPrompts().length }} Prompts</span>
+    </div>
+  </div>
+
+  <div class="search-container">
+    <mat-form-field appearance="fill" class="search-bar">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput type="text" placeholder="Search prompts..." [ngModel]="searchQuery()" (input)="onSearch($event)">
+      <button mat-icon-button matSuffix>
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div class="view-toggle">
+      <button mat-icon-button [color]="viewMode() === 'grid' ? 'primary' : ''" (click)="setViewMode('grid')" aria-label="Grid view">
+        <mat-icon>grid_view</mat-icon>
+      </button>
+      <button mat-icon-button [color]="viewMode() === 'list' ? 'primary' : ''" (click)="setViewMode('list')" aria-label="List view">
+        <mat-icon>view_list</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="viewMode() === 'grid'">
+    <div class="prompts-grid">
+      <mat-card *ngFor="let prompt of filteredPrompts()" class="prompt-card">
+        <mat-card-header>
+          <mat-card-title class="title-medium">{{ prompt.title }}</mat-card-title>
+          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="code-snippet">
+            <pre>{{ prompt.snippet }}</pre>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <mat-chip-set>
+            <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
+          </mat-chip-set>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="viewMode() === 'list'">
+    <div class="prompts-list">
+      <div *ngFor="let prompt of filteredPrompts()" class="prompt-list-item">
+        <div class="list-item-content-wrapper">
+          <h3 class="title-medium list-item-title">{{ prompt.title }}</h3>
+          <div class="snippet-preview">{{ prompt.snippet }}</div>
+        </div>
+        <div class="list-item-actions">
+          <mat-chip-set class="list-item-chips">
+            <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
+          </mat-chip-set>
+          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+</div>
+
+<ng-template #notFound>
+  <div class="dashboard-container">
+    <h2>Collection not found</h2>
+    <button mat-button routerLink="/collections">Return to Collections</button>
+  </div>
+</ng-template>

@@ -1,0 +1,14 @@
+<h2 mat-dialog-title class="dialog-title">New Collection</h2>
+<mat-dialog-content class="dialog-content">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="dialog-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Collection Name</mat-label>
+      <input matInput formControlName="name" placeholder="e.g. Marketing Prompts">
+      <mat-error *ngIf="form.get('name')?.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-button (click)="onCancel()" class="cancel-btn">Cancel</button>
+  <button mat-flat-button color="primary" (click)="onSubmit()" [disabled]="!form.valid" class="create-btn">Create</button>
+</mat-dialog-actions>

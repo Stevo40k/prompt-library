@@ -4,14 +4,14 @@
       <h2>Your Collections</h2>
       <p class="subtitle">Manage and organize your prompt workspaces.</p>
     </div>
-    <button mat-fab extended color="primary" class="new-collection-btn">
+    <button mat-fab extended color="primary" class="new-collection-btn" (click)="openNewCollectionDialog()">
       <mat-icon>add</mat-icon>
       New Collection
     </button>
   </div>
 
   <div class="collections-grid">
-    <mat-card *ngFor="let collection of collections()" class="collection-card">
+    <mat-card *ngFor="let collection of promptService.collections()" class="collection-card" (click)="navigateTo(collection.id)">
       <mat-card-header>
         <div mat-card-avatar class="collection-avatar">
           <mat-icon>folder_open</mat-icon>
