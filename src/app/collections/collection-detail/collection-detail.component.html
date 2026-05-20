@@ -31,10 +31,12 @@
 
   <ng-container *ngIf="viewMode() === 'grid'">
     <div class="prompts-grid">
-      <mat-card *ngFor="let prompt of filteredPrompts()" class="prompt-card">
+      <mat-card *ngFor="let prompt of filteredPrompts(); let i = index" 
+                class="prompt-card glass-card animate-fade-in"
+                [style.animation-delay]="(i * 0.05) + 's'">
         <mat-card-header>
           <mat-card-title class="title-medium">{{ prompt.title }}</mat-card-title>
-          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
+          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard" class="copy-btn">
             <mat-icon>content_copy</mat-icon>
           </button>
         </mat-card-header>
@@ -45,7 +47,7 @@
         </mat-card-content>
         <mat-card-actions>
           <mat-chip-set>
-            <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
+            <mat-chip *ngFor="let tag of prompt.tags" class="mustang-chip">{{ tag }}</mat-chip>
           </mat-chip-set>
         </mat-card-actions>
       </mat-card>
@@ -54,16 +56,18 @@
 
   <ng-container *ngIf="viewMode() === 'list'">
     <div class="prompts-list">
-      <div *ngFor="let prompt of filteredPrompts()" class="prompt-list-item">
+      <div *ngFor="let prompt of filteredPrompts(); let i = index" 
+           class="prompt-list-item glass-card animate-fade-in"
+           [style.animation-delay]="(i * 0.04) + 's'">
         <div class="list-item-content-wrapper">
           <h3 class="title-medium list-item-title">{{ prompt.title }}</h3>
           <div class="snippet-preview">{{ prompt.snippet }}</div>
         </div>
         <div class="list-item-actions">
           <mat-chip-set class="list-item-chips">
-            <mat-chip *ngFor="let tag of prompt.tags">{{ tag }}</mat-chip>
+            <mat-chip *ngFor="let tag of prompt.tags" class="mustang-chip">{{ tag }}</mat-chip>
           </mat-chip-set>
-          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard">
+          <button mat-icon-button (click)="copyToClipboard(prompt.snippet)" aria-label="Copy to clipboard" class="copy-btn">
             <mat-icon>content_copy</mat-icon>
           </button>
         </div>

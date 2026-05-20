@@ -73,10 +73,11 @@ export class CollectionDetailComponent implements OnInit {
 
   copyToClipboard(text: string) {
     navigator.clipboard.writeText(text).then(() => {
-      this.snackBar.open('Copied to clipboard', 'Close', {
+      this.snackBar.open('Prompt copied to clipboard', 'Close', {
         duration: 2000,
         horizontalPosition: 'end',
-        verticalPosition: 'bottom'
+        verticalPosition: 'bottom',
+        panelClass: ['mustang-snackbar']
       });
     });
   }

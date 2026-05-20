@@ -1,19 +1,55 @@
 .app-container {
+  display: flex;
   height: 100vh;
   background-color: var(--mustang-surface);
+  overflow: hidden;
 }
 
 .app-sidenav {
   width: 280px;
+  min-width: 280px;
+  flex-shrink: 0;
   background-color: var(--mustang-surface-container-low, #1b1c1d);
   border-right: 1px solid var(--mustang-outline-variant, #343536);
   display: flex;
   flex-direction: column;
+  transition: width 0.25s ease-in-out, min-width 0.25s ease-in-out;
+  overflow: hidden;
+
+  &.collapsed {
+    width: 88px;
+    min-width: 88px;
+
+    .sidenav-header {
+      padding: 24px 16px;
+      justify-content: center;
+    }
+
+    ::ng-deep {
+      .mat-mdc-list-item {
+        margin: 4px 8px;
+        width: calc(100% - 16px) !important;
+        justify-content: center;
+        border-radius: 24px !important;
+
+        .mdc-list-item__content {
+          overflow: visible;
+        }
+
+        .mat-icon {
+          margin-right: 0 !important;
+        }
+      }
+    }
+  }
 }
 
 .sidenav-header {
   padding: 32px 24px 24px;
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   .app-title {
     margin: 0;
     font-family: 'Work Sans', sans-serif;
@@ -21,6 +57,13 @@
     font-weight: 600;
     color: var(--electric-blue);
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .toggle-btn {
+    color: var(--mustang-on-surface-variant, #c4c6cd);
   }
 }
 
@@ -39,14 +82,14 @@
     margin: 4px 16px;
     border-radius: 28px !important;
     width: calc(100% - 32px) !important;
-    
+
     .mdc-list-item__primary-text {
       font-family: 'Inter', sans-serif;
       font-size: 14px;
       font-weight: 500;
       color: var(--mustang-on-surface);
     }
-    
+
     .mat-icon {
       color: var(--mustang-on-surface-variant, #c4c6cd);
     }
@@ -54,16 +97,16 @@
     &:hover {
       background-color: var(--mustang-surface-variant);
     }
-    
+
     // Active State Styling (Electric Blue Pill)
     &.active-nav-item {
       background-color: var(--electric-blue) !important;
-      
+
       .mdc-list-item__primary-text {
         color: var(--mustang-charcoal) !important;
         font-weight: 600;
       }
-      
+
       .mat-icon {
         color: var(--mustang-charcoal) !important;
       }
@@ -72,7 +115,9 @@
 }
 
 .app-content {
+  flex: 1;
   background-color: var(--mustang-surface);
   height: 100%;
   overflow-y: auto;
+  transition: flex 0.25s ease-in-out;
 }

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,8 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-main-layout',
   standalone: true,
   imports: [
+    CommonModule,
     RouterModule,
-    MatSidenavModule,
     MatListModule,
     MatIconModule,
     MatButtonModule
@@ -19,5 +19,9 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./main-layout.component.scss']
 })
 export class MainLayoutComponent {
+  isCollapsed = signal(false);
 
+  toggleSidenav() {
+    this.isCollapsed.update(v => !v);
+  }
 }

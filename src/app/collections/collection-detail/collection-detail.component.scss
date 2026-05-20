@@ -1,5 +1,3 @@
-// This reuses the Prompt Dashboard styling. In a production app, we would abstract this out into shared SCSS modules.
-
 .dashboard-container {
   padding: 24px;
   position: relative;
@@ -15,7 +13,13 @@
   margin-bottom: 24px;
 
   button {
-    color: var(--mustang-on-surface);
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--electric-blue);
+      background-color: rgba(209, 228, 255, 0.08);
+    }
   }
 }
 
@@ -23,11 +27,17 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: var(--mustang-surface);
-  padding-bottom: 16px;
+  background-color: rgba(19, 19, 21, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 12px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  margin-bottom: 24px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   
   .search-bar {
     width: 100%;
@@ -35,20 +45,78 @@
     flex: 1;
     
     ::ng-deep .mat-mdc-text-field-wrapper {
-      background-color: var(--mustang-surface-container);
-      border-radius: 28px;
+      background-color: rgba(31, 32, 33, 0.6) !important;
+      border-radius: 28px !important;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.25s ease;
+
+      &:hover {
+        border-color: rgba(209, 228, 255, 0.2);
+        background-color: rgba(31, 32, 33, 0.8) !important;
+      }
+      
+      &.mdc-text-field--focused {
+        border-color: var(--electric-blue);
+        box-shadow: 0 0 15px rgba(209, 228, 255, 0.15);
+      }
+    }
+
+    ::ng-deep .mat-mdc-form-field-flex {
+      padding: 0 16px !important;
+    }
+
+    ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+      display: none;
     }
     
     ::ng-deep .mat-mdc-form-field-focus-overlay {
       background-color: transparent;
     }
+    
+    ::ng-deep input {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--mustang-on-surface);
+      caret-color: var(--electric-blue);
+    }
+
+    ::ng-deep mat-icon {
+      color: rgba(255, 255, 255, 0.5) !important;
+      transition: color 0.2s ease;
+    }
+
+    ::ng-deep .mdc-text-field--focused mat-icon {
+      color: var(--electric-blue) !important;
+    }
   }
 
   .view-toggle {
     display: flex;
-    gap: 8px;
+    background: rgba(31, 32, 33, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 4px;
     align-items: center;
-    height: 56px;
+    gap: 2px;
+    
+    button {
+      height: 36px;
+      width: 36px;
+      border-radius: 16px;
+      color: rgba(255, 255, 255, 0.4);
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.8);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      &.mat-primary {
+        background: rgba(209, 228, 255, 0.1);
+        color: var(--electric-blue) !important;
+        border: 1px solid rgba(209, 228, 255, 0.15);
+      }
+    }
   }
 }
 
@@ -58,18 +126,20 @@
   gap: 12px;
 
   .headline-sm {
-    font-family: 'Work Sans', sans-serif;
-    font-size: 24px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
     font-weight: 600;
-    line-height: 32px;
+    letter-spacing: -0.2px;
     margin: 0;
     color: var(--mustang-on-surface);
   }
 
   .count-pill {
-    background-color: var(--mustang-surface-variant);
-    color: var(--mustang-on-surface);
-    font-size: 14px;
+    background-color: rgba(209, 228, 255, 0.08);
+    border: 1px solid rgba(209, 228, 255, 0.15);
+    color: var(--electric-blue);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
     font-weight: 500;
     padding: 2px 10px;
     border-radius: 12px;
@@ -81,49 +151,91 @@
 
 .prompts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 24px;
   padding-bottom: 80px;
 }
 
 .prompt-card {
-  border-radius: 12px;
   border: none;
-  background-color: var(--mustang-surface-container);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.24);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  opacity: 0;
   
   mat-card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
+    padding: 20px 20px 12px;
     
+    ::ng-deep .mat-mdc-card-header-text {
+      margin: 0;
+      flex: 1;
+      min-width: 0;
+    }
+
     .mat-mdc-card-title {
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 16px;
-      font-weight: 500;
-      letter-spacing: 0.15px;
+      font-weight: 600;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       margin: 0;
     }
     
-    button {
-      margin-left: auto;
-      color: var(--mustang-on-surface);
+    .copy-btn {
+      color: rgba(255, 255, 255, 0.4);
+      transition: all 0.2s ease;
+      margin-left: 12px;
+
+      &:hover {
+        color: var(--electric-blue);
+        background-color: rgba(209, 228, 255, 0.08);
+        transform: scale(1.08);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
     }
   }
 
   mat-card-content {
-    padding: 0 16px;
+    padding: 0 20px;
+    flex-grow: 1;
   }
 
   mat-card-actions {
-    padding: 16px;
+    padding: 16px 20px 20px;
+  }
+}
+
+.mustang-chip {
+  --mdc-chip-container-color: rgba(209, 228, 255, 0.06) !important;
+  --mdc-chip-label-text-color: var(--electric-blue) !important;
+  border: 1px solid rgba(209, 228, 255, 0.12) !important;
+  border-radius: 8px !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  min-height: 26px !important;
+  padding: 0 8px !important;
+  transition: all 0.2s ease !important;
+
+  &:hover {
+    border-color: rgba(209, 228, 255, 0.3) !important;
+    background-color: rgba(209, 228, 255, 0.1) !important;
+    box-shadow: 0 0 8px rgba(209, 228, 255, 0.1) !important;
   }
 }
 
 .prompts-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   padding-bottom: 80px;
 }
 
@@ -131,21 +243,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--mustang-surface-container);
-  border-radius: 12px;
-  padding: 12px 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  gap: 16px;
+  padding: 16px 20px;
+  gap: 20px;
+  opacity: 0;
+  border-radius: 12px !important;
 
   .list-item-content-wrapper {
     flex: 1;
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
   }
 
   .list-item-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
     margin: 0;
     white-space: nowrap;
     overflow: hidden;
@@ -155,7 +270,7 @@
   .snippet-preview {
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
-    color: var(--mustang-on-surface-variant);
+    color: rgba(255, 255, 255, 0.5);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -164,16 +279,57 @@
   .list-item-actions {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
     flex-shrink: 0;
   }
 
   .list-item-chips {
-    ::ng-deep .mdc-evolution-chip {
-      height: 24px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .copy-btn {
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--electric-blue);
+      background-color: rgba(209, 228, 255, 0.08);
+      transform: scale(1.08);
     }
-    ::ng-deep .mdc-evolution-chip__text-label {
-      font-size: 12px;
+    
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    align-items: stretch;
+    
+    .search-bar {
+      max-width: none;
+    }
+    
+    .view-toggle {
+      justify-content: center;
+      height: 48px;
+    }
+  }
+
+  .prompts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .prompt-list-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+
+    .list-item-actions {
+      justify-content: space-between;
     }
   }
 }

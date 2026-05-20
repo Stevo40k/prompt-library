@@ -2,6 +2,9 @@
 
 @include mat.core();
 
+// Load modern Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&family=Work+Sans:wght@600;700&display=swap');
+
 $mustang-theme: mat.define-theme((
   color: (
     theme-type: dark,
@@ -9,8 +12,8 @@ $mustang-theme: mat.define-theme((
     tertiary: mat.$blue-palette,
   ),
   typography: (
-    plain-family: 'Roboto, "Helvetica Neue", sans-serif',
-    brand-family: 'Roboto, "Helvetica Neue", sans-serif',
+    plain-family: 'Inter, Roboto, "Helvetica Neue", sans-serif',
+    brand-family: '"Space Grotesk", Roboto, sans-serif',
   ),
 ));
 
@@ -30,6 +33,12 @@ html {
   --mustang-surface-variant: #343536;
   --mustang-outline-variant: #C3C7CF;
   
+  /* Glassmorphism System */
+  --glass-bg: rgba(31, 32, 33, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  --glass-glow: rgba(209, 228, 255, 0.12);
+  
   /* Material M3 Token Overrides */
   --sys-surface: var(--mustang-surface);
   --sys-on-surface: var(--mustang-on-surface);
@@ -41,19 +50,70 @@ html {
   --mat-dialog-container-color: var(--mustang-surface-container);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Work+Sans:wght@600&display=swap');
+/* Glassmorphism Styles */
+.glass-card {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 16px !important;
+  box-shadow: var(--glass-shadow) !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+  position: relative;
+  overflow: hidden;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(209, 228, 255, 0.04) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgba(209, 228, 255, 0.25) !important;
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5), 0 0 20px 0 var(--glass-glow) !important;
+  }
+}
+
+/* Micro-animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.45s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* Premium Code Snippet Container */
 .code-snippet {
   font-family: 'JetBrains Mono', monospace;
   font-size: 13px;
   line-height: 20px;
-  background-color: var(--mustang-surface-variant);
+  background-color: rgba(20, 20, 22, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   color: var(--mustang-on-surface);
   padding: 16px;
-  border-radius: 8px;
+  border-radius: 10px;
   max-height: 250px;
   overflow-y: auto;
   overflow-x: hidden;
+  transition: border-color 0.2s ease;
+
+  &:hover {
+    border-color: rgba(209, 228, 255, 0.15);
+  }
 }
 
 .code-snippet pre {
@@ -63,10 +123,58 @@ html {
   font-family: inherit;
 }
 
+/* Sleek Dark Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(20, 20, 22, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Material SnackBar Overrides */
+.mat-mdc-snack-bar-container {
+  &.mustang-snackbar {
+    --mdc-snackbar-container-color: #1f2021;
+    --mdc-snackbar-supporting-text-color: #e2e2e6;
+    border: 1px solid rgba(209, 228, 255, 0.2) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(8px);
+    
+    .mdc-snackbar__surface {
+      background-color: transparent !important;
+    }
+    
+    .mat-mdc-snack-bar-label {
+      font-family: 'Inter', sans-serif !important;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+    }
+
+    .mat-mdc-snack-bar-action {
+      color: var(--electric-blue) !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-weight: 600;
+      
+      .mdc-button__label {
+        color: var(--electric-blue) !important;
+      }
+    }
+  }
+}
+
 html, body { height: 100%; }
 body { 
   margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  font-family: 'Inter', Roboto, sans-serif; 
   background-color: var(--mat-app-background-color);
   color: var(--mat-app-text-color);
 }

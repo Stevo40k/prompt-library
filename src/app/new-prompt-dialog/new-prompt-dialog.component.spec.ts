@@ -2,13 +2,18 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewPromptDialogComponent } from './new-prompt-dialog.component';
 
+import { MatDialogRef } from '@angular/material/dialog';
+
 describe('NewPromptDialogComponent', () => {
   let component: NewPromptDialogComponent;
   let fixture: ComponentFixture<NewPromptDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NewPromptDialogComponent]
+      imports: [NewPromptDialogComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: { close: () => {} } }
+      ]
     })
     .compileComponents();
 

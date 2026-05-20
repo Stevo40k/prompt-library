@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { NewPromptDialogComponent } from '../new-prompt-dialog/new-prompt-dialog.component';
 
@@ -28,6 +29,7 @@ export interface Prompt {
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    MatSnackBarModule,
     FormsModule
   ],
   templateUrl: './prompt-dashboard.component.html',
@@ -35,6 +37,7 @@ export interface Prompt {
 })
 export class PromptDashboardComponent {
   private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
 
   // State
   searchQuery = signal('');
@@ -90,7 +93,13 @@ export class PromptDashboardComponent {
   }
 
   copyToClipboard(snippet: string) {
-    navigator.clipboard.writeText(snippet);
-    // In a real app, we'd trigger a MatSnackBar here per DESIGN.md
+    navigator.clipboard.writeText(snippet).then(() => {
+      this.snackBar.open('Prompt copied to clipboard', 'Close', {
+        duration: 2000,
+        horizontalPosition: 'end',
+        verticalPosition: 'bottom',
+        panelClass: ['mustang-snackbar']
+      });
+    });
   }
 }
