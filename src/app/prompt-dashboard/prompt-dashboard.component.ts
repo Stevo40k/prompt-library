@@ -10,12 +10,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { NewPromptDialogComponent } from '../new-prompt-dialog/new-prompt-dialog.component';
-
-export interface Prompt {
-  title: string;
-  snippet: string;
-  tags: string[];
-}
+import { PromptService, Prompt } from '../shared/prompt.service';
 
 @Component({
   selector: 'app-prompt-dashboard',
@@ -38,27 +33,12 @@ export interface Prompt {
 export class PromptDashboardComponent {
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
+  private promptService = inject(PromptService);
 
   // State
   searchQuery = signal('');
   viewMode = signal<'grid' | 'list'>('grid');
-  prompts = signal<Prompt[]>([
-    {
-      title: 'Generate UI Component Scaffold',
-      snippet: 'Create a functional React component for a data table. Props should include: columns, data, onSort. Use Tailwind CSS for styling. Ensure it handles empty states gracefully.',
-      tags: ['#UI', '#React']
-    },
-    {
-      title: 'Refactor Legacy Python Script',
-      snippet: 'Review the following Python script. 1. Identify performance bottlenecks. 2. Update to use modern list comprehensions. 3. Add comprehensive type hints and docstrings. [INSERT_CODE_HERE]',
-      tags: ['#Refactor', '#Python']
-    },
-    {
-      title: 'API Endpoint Documentation',
-      snippet: 'Generate Swagger/OpenAPI 3.0 documentation for a POST /users/auth endpoint. Inputs: email, password. Outputs: 200 OK (JWT token), 401 Unauthorized, 429 Too Many Requests.',
-      tags: ['#API', '#Docs']
-    }
-  ]);
+  prompts = this.promptService.prompts;
 
   // Computed state for filtered prompts
   filteredPrompts = computed(() => {
@@ -87,7 +67,7 @@ export class PromptDashboardComponent {
 
     dialogRef.afterClosed().subscribe((result: Prompt) => {
       if (result) {
-        this.prompts.update(currentPrompts => [result, ...currentPrompts]);
+        this.promptService.addPrompt(result.title, result.snippet, result.tags);
       }
     });
   }

@@ -8,7 +8,7 @@ import { MatChipsModule, MatChipInputEvent } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Prompt } from '../prompt-dashboard/prompt-dashboard.component';
+import { Prompt } from '../shared/prompt.service';
 
 @Component({
   selector: 'app-new-prompt-dialog',

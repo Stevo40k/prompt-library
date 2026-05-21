@@ -34,7 +34,14 @@ export class CollectionDetailComponent implements OnInit {
   private promptService = inject(PromptService);
   private snackBar = inject(MatSnackBar);
 
-  collection = signal<Collection | undefined>(undefined);
+  collectionId = signal<string | null>(null);
+
+  collection = computed(() => {
+    const id = this.collectionId();
+    if (!id) return undefined;
+    return this.promptService.collections().find(c => c.id === id);
+  });
+
   searchQuery = signal('');
   viewMode = signal<'grid' | 'list'>('grid');
 
@@ -54,11 +61,7 @@ export class CollectionDetailComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
-      if (id) {
-        const found = this.promptService.getCollectionById(id);
-        this.collection.set(found);
-      }
+      this.collectionId.set(params.get('id'));
     });
   }
 
